@@ -28,18 +28,17 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+# deploy:
+#   needs: [build]
+#   runs-on: ubuntu-latest
 
-deploy:
-  needs: [build]
-  runs-on: ubuntu-latest
-
-  steps:
-    - name: ssh deploy to server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-        ls
+#   steps:
+#     - name: ssh deploy to server
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.HOST }}
+#         username: ${{ secrets.USERNAME }}
+#         password: ${{ secrets.PASSWORD }}
+#         port: ${{ secrets.PORT }}
+#         script: |
+#         ls -lah
